@@ -1,0 +1,41 @@
+# Gói "Javis Gate": cổng cho ChatGPT, Claude và AI khác làm việc cùng Javis.
+#
+# Tiền thân là "Javis trong ChatGPT" (mã cũ javis.javis-trong-chatgpt, plugin javis-trong-chatgpt).
+# 2.0.0 đổi mã sang tiếng Anh, thêm Claude, và cho AI bên ngoài nhắn thẳng vào hội thoại của Javis
+# (Javis 0.440.0) thay vì giao việc qua Kanban. `replaces` báo cho Javis biết đây là bản cập nhật của
+# gói cũ: cài lên là token, mức quyền và địa chỉ đã dán vào ChatGPT được giữ nguyên.
+# 2.2.0: AI bên ngoài chọn model và effort trong câu lệnh, và chuông báo chủ khi việc nó giao xong mà nó đã thôi
+# chờ. Các công cụ đó do lõi Javis cấp (chat_bridge), nên gói không đổi mức `compat`: Javis cũ vẫn chạy như 2.1.0.
+# Cũng 2.2.0: công cụ AI khác nối được (địa chỉ quay về chủ tự cho phép, khoá riêng cho công cụ chỉ dán header).
+# 2.2.1: trang của gói làm lại cho điện thoại: hướng dẫn gọn sau nút i, các bước đánh số, ngắt riêng từng AI.
+# 2.2.2: trang của gói theo sáng/tối đã chọn trên dashboard (mặc định sáng), cùng màu và font với dashboard.
+# 2.2.3: Claude Code và Codex nối vào Gate là tự hỏi bật Javis Sync (lưu mọi lượt chat vào Javis); gói
+# truyền địa chỉ công khai sang lõi để lệnh cài tự điền đúng URL. Cần Javis OS có javis_sync_setup.
+format: javis-pack
+spec: 1
+
+id: javis.gate
+version: 2.2.3
+replaces:
+  - javis.javis-trong-chatgpt
+
+name:
+  vi: Javis Gate
+  en: Javis Gate
+description:
+  vi: Cổng cho ChatGPT, Claude, Gemini, Cursor, n8n và công cụ AI khác làm việc cùng Javis. AI đó đọc hội thoại của Javis, tư vấn cho bạn, và khi bạn đồng ý thì nhắn thẳng vào khung chat để Javis làm tiếp, chọn được cả model và effort. Bạn xem được tiến độ, chuông báo khi việc dài xong, Javis nhớ lại cho lần sau. Cần Javis 0.440.0 trở lên, mật khẩu quản trị và tên miền https.
+  en: A gate for ChatGPT, Claude, Gemini, Cursor, n8n and other AI tools to work with Javis. The AI reads your Javis chats, advises you, and once you agree posts straight into the chat so Javis carries on, with the model and effort it picks. You watch the progress, the bell rings when long work is done, Javis remembers it next time. Needs Javis 0.440.0 or newer, an admin password and an https domain.
+
+author:
+  name: Javis
+license: MIT
+homepage: https://github.com/blogminhquy/javis-store/tree/main/packs/javis.gate
+
+# 0.440.0 mở bốn tool chat cho cửa Gate (`mcp_hub.tra_loi_jsonrpc(gate=...)`) và cơ chế đổi mã gói
+# (`replaces`). Bản cũ hơn thì gói bị tắt kèm lý do đọc được.
+compat:
+  app: ">=0.440.0"
+
+provides:
+  plugins:
+    - plugins/javis-gate
